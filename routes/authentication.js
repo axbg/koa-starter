@@ -6,10 +6,13 @@ const router = new Router();
 
 router.get("/google/", passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-router.get("/facebook/", passport.authenticate('facebook'));
+router.get("/facebook/", passport.authenticate('facebook', { scope: ['email'] }));
 
-router.get("/", passport.authenticate(['google', 'facebook']), (ctx) => {
-    // redirect to homepage after login
+router.get("/google/callback", passport.authenticate('google'), (ctx) => {
+    ctx.redirect("/");
+});
+
+router.get("/facebook/callback", passport.authenticate('facebook'), (ctx) => {
     ctx.redirect("/");
 });
 

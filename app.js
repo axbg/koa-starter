@@ -4,11 +4,11 @@ const bodyParser = require('koa-bodyparser');
 const cors = require('@koa/cors');
 const morgan = require('koa-morgan');
 const session = require('koa-session');
-const passport = require('./utils/security');
 
-const logger = require('./utils/logger');
-const middleware = require('./middlewares');
 const config = require('./config');
+const logger = require('./utils/logger');
+const passport = require('./utils/security');
+const middleware = require('./middlewares');
 const router = require('./routes');
 const connectDatabase = require('./models').connect;
 

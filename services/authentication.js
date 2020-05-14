@@ -1,11 +1,16 @@
 const UserModel = require('../models').UserModel;
 
-const getOrCreateUserId = async (profile) => {
-    // handle user login
-    // info returned by the oauth providers is stored in the "profile" parameter
-    return { id: "_userid" };
+const getOrCreateUser = async (profile) => {
+    const existingUser = await UserModel.findOne({ email: profile.email });
+
+    if (existingUser) {
+        return { _id: existingUser._id };
+    }
+
+    const newUser = await UserModel.create(profile);
+    return { _id: newUser._id };
 };
 
 module.exports = {
-    getOrCreateUserId
+    getOrCreateUser
 }

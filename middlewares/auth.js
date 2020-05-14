@@ -1,9 +1,9 @@
-const authenticated = (ctx, next) => {
-    if (ctx.session.passport.user) {
-        next();
+const authenticated = async (ctx, next) => {
+    if (ctx.session.passport && ctx.session.passport.user._id) {
+        await next();
     } else {
         ctx.status = 401;
-        ctx.body = { message: "Not authenticated" };
+        ctx.body = { message: "Unauthorized" };
     }
 };
 

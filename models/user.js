@@ -1,7 +1,9 @@
 const UserModelSchema = (db) => {
     return db.model("user", db.Schema({
         email: String,
-        name: String
+        firstname: String,
+        lastname: String,
+        picture: String
     }))
 };
 
