@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "prod": "cross-env NODE_ENV=production node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -36,5 +37,9 @@
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.4.2",
     "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.0",
+    "eslint-config-google": "^0.14.0"
   }
 }

@@ -16,7 +16,7 @@ const app = new Koa();
 
 config.ALLOW_CORS && app.use(cors());
 
-app.use(morgan('combined', { stream: logger }));
+app.use(morgan('combined', {stream: logger}));
 
 app.keys = config.COOKIE_KEYS;
 app.use(passport.initialize());
@@ -34,5 +34,5 @@ app.use(router.allowedMethods());
 // connectDatabase();
 
 app.listen(config.PORT, () => {
-    console.log("koa starter - running on http://localhost:" + config.PORT);
+  console.log('koa starter - running on http://localhost:' + config.PORT);
 });
