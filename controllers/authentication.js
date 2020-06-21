@@ -1,14 +1,10 @@
 const service = require('../services').authentication;
 
 const logout = async (ctx) => {
-    ctx.status = 200;
+    ctx.session = null;
+    ctx.body = { message: "Logged out" };
 };
 
-const removeAccount = async (ctx) => {
-    ctx.status = 200;
-}
-
 module.exports = {
-    logout,
-    removeAccount
+    logout
 };

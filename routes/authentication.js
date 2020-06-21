@@ -18,6 +18,4 @@ router.get("/facebook/callback", passport.authenticate('facebook'), (ctx) => {
 
 router.get('/logout', controller.logout);
 
-router.get('/remove-account', controller.removeAccount);
-
 module.exports = router;

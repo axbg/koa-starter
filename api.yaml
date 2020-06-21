@@ -1,0 +1,61 @@
+openapi: 3.0.1
+info:
+  title: koa-starter
+  version: 0.1.9
+servers:
+  - url: /api
+    description: Exposed only for development purposes
+components:
+  securitySchemes:
+    CookieToken:
+      type: apiKey
+      in: cookie
+      name: koa:session
+security:
+  - CookieToken: []
+paths:
+  /:
+    get:
+      summary: Hello World endpoint
+      description: Simple endpoint used to test if the server is running
+      security: []
+      responses:
+        "200":
+          description: OK
+          
+  /authentication/google:
+    get:
+      tags: [authentication]
+      summary: Executes Google OAuth2 login process
+      description: Returns a cookie used for stateless authentication
+      security: []
+      responses:
+        "200":
+          description: OK
+
+  /authentication/facebook:
+    get:
+      tags: [authentication]
+      summary: Executes Facebook OAuth2 login process
+      description: Returns a cookie used for stateless authentication
+      security: []
+      responses:
+        "200":
+          description: OK
+
+  /authentication/logout:
+    post:
+      tags: [authentication]
+      summary: Executes logout procedure
+      description: Forces authentication cookie removal on the client
+      security: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                message:
+                  type: string
+                example:
+                  message: Logged out
