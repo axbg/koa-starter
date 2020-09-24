@@ -20,9 +20,9 @@
   "author": "Alex Bisag",
   "license": "MIT",
   "dependencies": {
-    "@koa/cors": "^3.0.0",
+    "@koa/cors": "^3.1.0",
     "cross-env": "^7.0.2",
-    "koa": "^2.11.0",
+    "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-json": "^2.0.2",
     "koa-morgan": "^1.0.1",
@@ -30,16 +30,15 @@
     "koa-router": "^8.0.8",
     "koa-session": "^5.13.1",
     "koa2-swagger-ui": "^3.0.1",
-    "log4js": "^6.2.1",
-    "mongoose": "^5.9.11",
+    "mongoose": "^5.10.6",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth": "^2.0.0",
-    "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^4.4.2",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "eslint": "^7.3.0",
+    "eslint": "^7.9.0",
     "eslint-config-google": "^0.14.0"
   }
 }

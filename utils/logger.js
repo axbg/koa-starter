@@ -1,40 +1,49 @@
 const winston = require('winston');
-require('winston-daily-rotate-file');
-const log4js = require('log4js');
+const {combine, timestamp, json} = winston.format;
 const config = require('../config');
 
-const fileRotateTransport = new (winston.transports.DailyRotateFile)({
+require('winston-daily-rotate-file');
+
+const removeErrors = winston.format((info, opts) => {
+  return info.level === 'error' ? false : info;
+});
+
+const accessTransport = new winston.transports.DailyRotateFile({
+  level: 'debug',
   filename: '%DATE%.log',
   dirname: 'logs/access',
   datePattern: 'YYYY-MM-DD',
+  format: combine(removeErrors(), timestamp(), json()),
   utc: true,
   maxSize: '20m',
 });
 
-const transports = [fileRotateTransport];
-config.DEV && transports.push(new winston.transports.Console({level: 'debug', colorize: true}));
+const errorTransport = new winston.transports.DailyRotateFile({
+  level: 'warn',
+  filename: '%DATE%.log',
+  dirname: 'logs/error',
+  datePattern: 'YYYY-MM-DD',
+  format: combine(timestamp(), json()),
+  utc: true,
+  maxSize: '20m',
+});
 
-const accessLogger = winston.createLogger({
-  level: 'info',
-  format: winston.format.json(),
+const transports = [accessTransport, errorTransport];
+
+config.DEV &&
+  transports.push(
+      new winston.transports.Console({level: 'debug', colorize: true}),
+  );
+
+const winstonLogger = new winston.createLogger({
   transports: transports,
   exitOnError: false,
 });
 
-log4js.configure({
-  appenders: {
-    errors: {
-      type: 'datefile', filename: 'logs/errors/errors.log',
-    },
-  },
-  categories: {default: {appenders: ['errors'], level: 'error'}},
-});
-
-const errorLogger = log4js.getLogger('errors');
-
-module.exports = {
+winstonLogger.stream = {
   write: (text) => {
-    accessLogger.info(text);
+    winstonLogger.debug(text);
   },
-  errorLogger,
 };
+
+module.exports = winstonLogger;

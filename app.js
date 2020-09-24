@@ -16,7 +16,7 @@ const app = new Koa();
 
 config.ALLOW_CORS && app.use(cors());
 
-app.use(morgan('combined', {stream: logger}));
+app.use(morgan('combined', {stream: logger.stream}));
 
 app.keys = config.COOKIE_KEYS;
 app.use(passport.initialize());
