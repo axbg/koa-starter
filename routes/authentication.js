@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 const controller = require('../controllers').authentication;
-const passport = require('../utils/security');
+const passport = require('../configurations/security');
 
 const router = new Router();
 

@@ -4,7 +4,7 @@
 ----
 Features
 
-- dev & prod config
+- dotenv properties
 - MongoDB connection with Mongoose
 - Passport integration
   - Google
