@@ -10,10 +10,10 @@ const globalErrorHandler = async (ctx, next) => {
     !properties.PROD && console.log(err.stack);
     if (err instanceof KoaError) {
       ctx.status = err.code;
-      ctx.body = { message: err.message };
+      ctx.body = {message: err.message};
     } else {
       ctx.status = 500;
-      ctx.body = { message: !properties.PROD ? ctx.message : 'Something very nasty happened' };
+      ctx.body = {message: !properties.PROD ? ctx.message : 'Something very nasty happened'};
     }
   }
 };

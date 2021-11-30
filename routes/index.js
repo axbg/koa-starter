@@ -7,15 +7,15 @@ const authenticationMiddleware = require('../middlewares').authentication.authen
 
 const authenticationRouter = require('./authentication');
 
-const router = new Router({ prefix: '/api' });
+const router = new Router({prefix: '/api'});
 
 router.get('/', (ctx) => {
   ctx.status = 200;
-  ctx.body = { message: 'koa starter - hello endpoint' };
+  ctx.body = {message: 'koa starter - hello endpoint'};
 });
 
 if (properties.ENABLE_SWAGGER) {
-  router.get('/docs', koaSwagger({ routePrefix: false, swaggerOptions: { spec } }));
+  router.get('/docs', koaSwagger({routePrefix: false, swaggerOptions: {spec}}));
 }
 
 // public routes - register your public routes here

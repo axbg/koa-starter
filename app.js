@@ -13,14 +13,15 @@ const passport = require('./configurations/security');
 const middleware = require('./middlewares');
 const router = require('./routes');
 const connectDatabase = require('./models').connect;
+const bindWebSocket = require('./websockets').bindWebSocket;
 
 const app = new Koa();
 
-console.log(properties);
+!properties.PROD && console.log(properties);
 
 properties.ALLOW_CORS && app.use(cors());
 
-app.use(morgan('combined', { stream: logger.stream }));
+app.use(morgan('combined', {stream: logger.stream}));
 
 app.keys = properties.COOKIE_KEYS;
 app.use(passport.initialize());
@@ -31,11 +32,12 @@ app.use(bodyParser());
 
 app.use(middleware.error.globalErrorHandler);
 
+connectDatabase();
+
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-// uncomment to enable database connection
-// connectDatabase();
+properties.ALLOW_CORS && bindWebSocket(app);
 
 app.listen(properties.PORT, () => {
   console.log('koa starter - running on http://localhost:' + properties.PORT);

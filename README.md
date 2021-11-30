@@ -9,6 +9,7 @@ Features
 - Passport integration
   - Google
   - Facebook
+- WebSockets enablement using Socket.IO
 - Cookie-based JWT
 - In-file logs with 24h rotation
 - Swagger UI
