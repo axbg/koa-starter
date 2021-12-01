@@ -5,7 +5,7 @@ const spec = require('../configurations/docs');
 
 const authenticationMiddleware = require('../middlewares').authentication.authenticated;
 
-const authenticationRouter = require('./authentication');
+const userRouter = require('./user');
 
 const router = new Router({prefix: '/api'});
 
@@ -19,10 +19,9 @@ if (properties.ENABLE_SWAGGER) {
 }
 
 // public routes - register your public routes here
-router.use('/authentication', authenticationRouter.routes());
+router.use('/user', userRouter.routes());
 
 router.use(authenticationMiddleware);
 
 // protected routes - register your protected routes here
-
 module.exports = router;

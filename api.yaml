@@ -23,32 +23,32 @@ paths:
         "200":
           description: OK
           
-  /authentication/google:
+  /user/login/google:
     get:
-      tags: [authentication]
+      tags: [ authentication ]
       summary: Executes Google OAuth2 login process
       description: Returns a cookie used for stateless authentication
-      security: []
+      security: [ ]
       responses:
         "200":
           description: OK
 
-  /authentication/facebook:
+  /user/login/facebook:
     get:
-      tags: [authentication]
+      tags: [ authentication ]
       summary: Executes Facebook OAuth2 login process
       description: Returns a cookie used for stateless authentication
-      security: []
+      security: [ ]
       responses:
         "200":
           description: OK
 
-  /authentication/logout:
+  /user/logout:
     post:
-      tags: [authentication]
+      tags: [ authentication ]
       summary: Executes logout procedure
       description: Forces authentication cookie removal on the client
-      security: []
+      security: [ ]
       responses:
         "200":
           description: OK

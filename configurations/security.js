@@ -3,7 +3,7 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 
 const properties = require('../properties');
-const service = require('../services').authentication;
+const service = require('../services').user;
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -31,13 +31,13 @@ const callbackHandler = async (accessToken, refreshToken, profile, done) => {
 passport.use(new GoogleStrategy({
   clientID: properties.GOOGLE_CLIENT_ID,
   clientSecret: properties.GOOGLE_SECRET,
-  callbackURL: '/api/authentication/google/callback/',
+  callbackURL: '/api/user/login/google/callback/',
 }, callbackHandler));
 
 passport.use(new FacebookStrategy({
   clientID: properties.FACEBOOK_CLIENT_ID,
   clientSecret: properties.FACEBOOK_SECRET,
-  callbackURL: '/api/authentication/facebook/callback/',
+  callbackURL: '/api/user/login/facebook/callback/',
   profileFields: ['email', 'name'],
 }, callbackHandler));
 

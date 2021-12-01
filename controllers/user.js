@@ -1,4 +1,4 @@
-const service = require('../services').authentication;
+const service = require('../services').user;
 
 const logout = async (ctx) => {
   ctx.session = null;

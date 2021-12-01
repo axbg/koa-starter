@@ -11,7 +11,6 @@ const io = new IO({
 });
 
 const bindWebSocket = (app) => {
-  console.log(io);
   io.attach(app);
 
   io.on('connection', (socket, data) => {
