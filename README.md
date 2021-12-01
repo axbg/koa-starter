@@ -5,7 +5,9 @@
 Features
 
 - dotenv properties
-- MongoDB connection with Mongoose
+- Database connection
+  - MongoDB connection with Mongoose
+  - SQL connection with Sequelize
 - Passport integration
   - Google
   - Facebook

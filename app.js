@@ -12,7 +12,10 @@ const logger = require('./configurations/logger');
 const passport = require('./configurations/security');
 const middleware = require('./middlewares');
 const router = require('./routes');
-const connectDatabase = require('./models').connect;
+
+// const connectMongoDatabase = require('./models/mongo').connect;
+// const connectSqlDatabase = require('./models/sql').connect;
+
 const bindWebSocket = require('./websockets').bindWebSocket;
 
 const app = new Koa();
@@ -32,7 +35,9 @@ app.use(bodyParser());
 
 app.use(middleware.error.globalErrorHandler);
 
-connectDatabase();
+// choose the database type you wish to use
+// connectSqlDatabase();
+// connectMongoDatabase();
 
 app.use(router.routes());
 app.use(router.allowedMethods());

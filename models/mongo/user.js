@@ -1,4 +1,4 @@
-const UserModelSchema = (db) => {
+module.exports = (db) => {
   return db.model('user', db.Schema({
     email: String,
     firstname: String,
@@ -6,5 +6,3 @@ const UserModelSchema = (db) => {
     picture: String,
   }));
 };
-
-module.exports = UserModelSchema;

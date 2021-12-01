@@ -1,4 +1,4 @@
-const UserModel = require('../models').UserModel;
+const UserModel = require('../models/mongo').UserModel;
 
 const getOrCreateUser = async (profile) => {
   const existingUser = await UserModel.findOne({email: profile.email});
