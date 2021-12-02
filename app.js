@@ -42,7 +42,7 @@ app.use(middleware.error.globalErrorHandler);
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-properties.ALLOW_CORS && bindWebSocket(app);
+properties.ENABLE_WEB_SOCKETS && bindWebSocket(app);
 
 app.listen(properties.PORT, () => {
   console.log('koa starter - running on http://localhost:' + properties.PORT);
