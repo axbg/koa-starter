@@ -1,12 +1,12 @@
 const IO = require('koa-socket-2');
 
-const properties = require('../properties');
+const {PROD} = require('../properties');
 
 const io = new IO({
   ioOptions: {
     pingInterval: 5000,
     pingTimeout: 10000,
-    ...(!properties.PROD && {cors: {}}),
+    ...(!PROD && {cors: {}}),
   },
 });
 

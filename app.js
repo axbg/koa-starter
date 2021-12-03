@@ -7,43 +7,47 @@ const cors = require('@koa/cors');
 const session = require('koa-session');
 const morgan = require('koa-morgan');
 
-const properties = require('./properties');
 const logger = require('./configurations/logger');
 const passport = require('./configurations/security');
 const middleware = require('./middlewares');
 const router = require('./routes');
 
-// const connectMongoDatabase = require('./models/mongo').connect;
-// const connectSqlDatabase = require('./models/sql').connect;
+const {connectDatabase} = require('./models');
+const {bindWebSocket} = require('./websockets');
 
-const bindWebSocket = require('./websockets').bindWebSocket;
+const {
+  PROD,
+  ALLOW_CORS,
+  ENABLE_WEB_SOCKETS,
+  COOKIE_KEYS,
+  SESSION_CONFIG,
+  PORT,
+} = require('./properties');
 
 const app = new Koa();
 
-!properties.PROD && console.log(properties);
+!PROD && console.log(require('./properties'));
 
-properties.ALLOW_CORS && app.use(cors());
+ALLOW_CORS && app.use(cors());
 
 app.use(morgan('combined', {stream: logger.stream}));
 
-app.keys = properties.COOKIE_KEYS;
+app.keys = COOKIE_KEYS;
 app.use(passport.initialize());
-app.use(session(properties.SESSION_CONFIG, app));
+app.use(session(SESSION_CONFIG, app));
 
 app.use(json());
 app.use(bodyParser());
 
 app.use(middleware.error.globalErrorHandler);
 
-// choose the database type you wish to use
-// connectSqlDatabase();
-// connectMongoDatabase();
+connectDatabase();
 
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-properties.ENABLE_WEB_SOCKETS && bindWebSocket(app);
+ENABLE_WEB_SOCKETS && bindWebSocket(app);
 
-app.listen(properties.PORT, () => {
-  console.log('koa starter - running on http://localhost:' + properties.PORT);
+app.listen(PORT, () => {
+  console.log('koa starter - running on http://localhost:' + PORT);
 });

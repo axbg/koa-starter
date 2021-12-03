@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
-const properties = require('../../properties');
+const {DB_URI} = require('../../properties');
 
-const sequelize = new Sequelize(properties.DB_URI);
+const sequelize = new Sequelize(DB_URI);
 
 // sequelize config
 

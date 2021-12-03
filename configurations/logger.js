@@ -1,6 +1,6 @@
 const winston = require('winston');
 const {combine, timestamp, json} = winston.format;
-const properties = require('../properties');
+const {PROD} = require('../properties');
 
 require('winston-daily-rotate-file');
 
@@ -30,7 +30,7 @@ const errorTransport = new winston.transports.DailyRotateFile({
 
 const transports = [accessTransport, errorTransport];
 
-!properties.PROD &&
+!PROD &&
   transports.push(
       new winston.transports.Console({level: 'debug', colorize: true}),
   );

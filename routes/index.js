@@ -1,9 +1,9 @@
 const Router = require('koa-router');
-const properties = require('../properties');
+const {ENABLE_SWAGGER} = require('../properties');
 const koaSwagger = require('koa2-swagger-ui');
 const spec = require('../configurations/docs');
 
-const authenticationMiddleware = require('../middlewares').authentication.authenticated;
+const {authenticated}= require('../middlewares').authentication;
 
 const userRouter = require('./user');
 
@@ -14,14 +14,19 @@ router.get('/', (ctx) => {
   ctx.body = {message: 'koa starter - hello endpoint'};
 });
 
-if (properties.ENABLE_SWAGGER) {
+if (ENABLE_SWAGGER) {
   router.get('/docs', koaSwagger({routePrefix: false, swaggerOptions: {spec}}));
 }
 
-// public routes - register your public routes here
+// public routes - register your public routers here
 router.use('/user', userRouter.routes());
 
-router.use(authenticationMiddleware);
+router.use(authenticated);
 
-// protected routes - register your protected routes here
+// protected routes - you can register your protected routers here
+router.get('/authenticated', (ctx) => {
+  ctx.status = 200;
+  ctx.body = {message: 'koa-starter - authenticated endpoint'};
+});
+
 module.exports = router;

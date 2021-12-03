@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: koa-starter
-  version: 0.1.9
+  version: 1.0.0
 servers:
   - url: /api
     description: Exposed only for development purposes
@@ -22,11 +22,42 @@ paths:
       responses:
         "200":
           description: OK
-          
+
+  /authenticated:
+    get:
+      summary: Hello World authenticated endpoint
+      description: Simple endpoint used to test if the server is running and the authentication works
+      security:
+        - CookieToken: []
+      responses:
+        "200":
+          description: OK
+
+  /user/login/local:
+    post:
+      tags: [ user ]
+      summary: Executes login or registration with email and password
+      description: Returns a cookie used for stateless authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      security: [ ]
+      responses:
+        "200":
+          description: OK
+
   /user/login/google:
     get:
-      tags: [ authentication ]
-      summary: Executes Google OAuth2 login process
+      tags: [ user ]
+      summary: Executes Google OAuth2 login or registration process
       description: Returns a cookie used for stateless authentication
       security: [ ]
       responses:
@@ -35,8 +66,8 @@ paths:
 
   /user/login/facebook:
     get:
-      tags: [ authentication ]
-      summary: Executes Facebook OAuth2 login process
+      tags: [ user ]
+      summary: Executes Facebook OAuth2 login or registration process
       description: Returns a cookie used for stateless authentication
       security: [ ]
       responses:
@@ -45,10 +76,11 @@ paths:
 
   /user/logout:
     post:
-      tags: [ authentication ]
+      tags: [ user ]
       summary: Executes logout procedure
       description: Forces authentication cookie removal on the client
-      security: [ ]
+      security:
+        - CookieToken: []
       responses:
         "200":
           description: OK

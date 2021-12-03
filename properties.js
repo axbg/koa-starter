@@ -3,11 +3,13 @@ module.exports = {
   PORT: process.env.PORT || 8080,
   DB_URI: process.env.DB_URI,
   ALLOW_CORS: !!+process.env.ALLOW_CORS,
+  PASSWORD_SALT_ROUNDS: process.env.password_salt_rounds || 10,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_SECRET: process.env.GOOGLE_SECRET,
   FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
   FACEBOOK_SECRET: process.env.FACEBOOK_SECRET,
-  COOKIE_KEYS: [process.env.COOKIE_KEY],
+  // eslint-disable-next-line max-len
+  COOKIE_KEYS: process.env.COOKIE_KEYS ? process.env.COOKIE_KEYS.split(process.env.COOKIE_KEYS_SEPARATOR || '#') : ['key1', 'key2'],
   ENABLE_WEB_SOCKETS: !!+process.env.ENABLE_WEB_SOCKETS,
   ENABLE_SWAGGER: !!+process.env.ENABLE_SWAGGER,
   SESSION_CONFIG: {

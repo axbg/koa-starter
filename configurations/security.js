@@ -2,7 +2,12 @@ const passport = require('koa-passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-const properties = require('../properties');
+const {
+  GOOGLE_CLIENT_ID,
+  GOOGLE_SECRET,
+  FACEBOOK_CLIENT_ID,
+  FACEBOOK_SECRET,
+} = require('../properties');
 const service = require('../services').user;
 
 passport.serializeUser(function(user, done) {
@@ -29,14 +34,14 @@ const callbackHandler = async (accessToken, refreshToken, profile, done) => {
 };
 
 passport.use(new GoogleStrategy({
-  clientID: properties.GOOGLE_CLIENT_ID,
-  clientSecret: properties.GOOGLE_SECRET,
+  clientID: GOOGLE_CLIENT_ID,
+  clientSecret: GOOGLE_SECRET,
   callbackURL: '/api/user/login/google/callback/',
 }, callbackHandler));
 
 passport.use(new FacebookStrategy({
-  clientID: properties.FACEBOOK_CLIENT_ID,
-  clientSecret: properties.FACEBOOK_SECRET,
+  clientID: FACEBOOK_CLIENT_ID,
+  clientSecret: FACEBOOK_SECRET,
   callbackURL: '/api/user/login/facebook/callback/',
   profileFields: ['email', 'name'],
 }, callbackHandler));

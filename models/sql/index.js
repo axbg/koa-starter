@@ -2,11 +2,11 @@ const db = require('./db');
 
 const UserModel = require('./user')(db);
 
-const connect = () => {
+const connectDatabase = () => {
   db.sync();
 };
 
 module.exports = {
-  connect,
+  connectDatabase,
   UserModel,
 };

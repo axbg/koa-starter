@@ -6,4 +6,11 @@ const KoaError = class KoaError extends Error {
   }
 };
 
-module.exports = KoaError;
+const throwError = (message, code) => {
+  throw new KoaError(message, code);
+};
+
+module.exports = {
+  KoaError,
+  throwError,
+};
